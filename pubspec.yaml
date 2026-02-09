@@ -68,12 +68,12 @@ flutter:
   fonts:
     - family: Times New Roman
       fonts:
-        - asset: fonts/TimesNewRoman.ttf
-        - asset: fonts/TimesNewRoman-Italic.ttf
+        - asset: assets/fonts/TimesNewRoman.ttf
+        - asset: assets/fonts/TimesNewRoman-Italic.ttf
           style: italic
-        - asset: fonts/TimesNewRoman-Bold.ttf
+        - asset: assets/fonts/TimesNewRoman-Bold.ttf
           weight: 700
-        - asset: fonts/TimesNewRoman-Bold-Italic.ttf
+        - asset: assets/fonts/TimesNewRoman-Bold-Italic.ttf
           weight: 700
           style: italic
   #   - family: Trajan Pro

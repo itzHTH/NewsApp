@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/routes/routes_name.dart';
+import 'package:news/features/onboarding/onborading_screen.dart';
 import 'package:news/features/spalsh/splash_screen.dart';
 
 class AppRouter {
@@ -9,6 +10,10 @@ class AppRouter {
     switch (settings.name) {
       case RoutesName.splashScreen:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
+      case RoutesName.onboradingScreen:
+        return MaterialPageRoute(
+          builder: (context) => const OnboradingScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

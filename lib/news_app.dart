@@ -14,7 +14,7 @@ class NewsApp extends StatelessWidget {
       home: Scaffold(body: SplashScreen()),
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: RoutesName.splashScreen,
+      initialRoute: RoutesName.onboradingScreen,
     );
   }
 }
