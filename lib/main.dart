@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news/core/data/local/shared_helper.dart';
+import 'package:news/news_app.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefsHelper().initShared();
+
   runApp(const NewsApp());
-}
-
-class NewsApp extends StatelessWidget {
-  const NewsApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: Scaffold(body: Center(child: Text('News App'))),
-    );
-  }
 }
