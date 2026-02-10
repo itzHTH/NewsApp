@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/routes/routes_name.dart';
-import 'package:news/features/onboarding/onborading_screen.dart';
+import 'package:news/features/onboarding/screens/onborading_screen.dart';
 import 'package:news/features/spalsh/splash_screen.dart';
 
 class AppRouter {
