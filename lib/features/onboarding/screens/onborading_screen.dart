@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'package:news/core/constant/app_constants.dart';
+import 'package:news/core/data/local/shared_helper.dart';
+import 'package:news/core/extensions/route_extension.dart';
+import 'package:news/core/routes/routes_name.dart';
 import 'package:news/core/theme/app_colors.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/features/onboarding/models/page_model.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import 'package:news/features/onboarding/widgets/page_widegt.dart';
+import 'package:news/features/onboarding/widgets/on_boarding_page_view.dart';
+import 'package:news/features/onboarding/widgets/onboarding_button.dart';
 
 class OnboradingScreen extends StatefulWidget {
   const OnboradingScreen({super.key});
@@ -15,7 +20,13 @@ class OnboradingScreen extends StatefulWidget {
 }
 
 class _OnboradingScreenState extends State<OnboradingScreen> {
-  PageController pageController = PageController();
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
 
   @override
   void dispose() {
@@ -44,6 +55,28 @@ class _OnboradingScreenState extends State<OnboradingScreen> {
     ),
   ];
 
+  bool _isLastPage = false;
+
+  void skip() {
+    pageController.animateToPage(
+      pages.length - 1,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void next() {
+    pageController.nextPage(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void finish() async {
+    await SharedPrefsHelper().setBoolValue(AppConstants.isFirstTime, false);
+    context.pushNamedAndRemoveUntil(RoutesName.loginScreen);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +84,12 @@ class _OnboradingScreenState extends State<OnboradingScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.bgColor,
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text("Skip", style: AppTextStyles.primaryRegular16),
-          ),
+          _isLastPage
+              ? const SizedBox.shrink()
+              : TextButton(
+                  onPressed: skip,
+                  child: Text("Skip", style: AppTextStyles.primaryRegular16),
+                ),
         ],
       ),
       body: SafeArea(
@@ -63,29 +98,27 @@ class _OnboradingScreenState extends State<OnboradingScreen> {
           child: Column(
             children: [
               Expanded(
-                child: PageView.builder(
-                  controller: pageController,
-                  itemBuilder: (context, index) {
-                    return PageWidget(page: pages[index]);
+                child: OnBoardingPageView(
+                  pageController: pageController,
+                  pages: pages,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _isLastPage = index == pages.length - 1;
+                    });
                   },
-                  itemCount: 3,
                 ),
               ),
               SizedBox(height: 20.h),
               SmoothPageIndicator(
                 controller: pageController,
                 count: 3,
-                effect: SwapEffect(),
+                effect: SwapEffect(activeDotColor: AppColors.primaryColor),
               ),
               SizedBox(height: 120.h),
-              ElevatedButton(
-                onPressed: () {
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                },
-                child: Text("Next", style: AppTextStyles.textButton16),
+              OnboardingButton(
+                pageController: pageController,
+                onTap: _isLastPage ? finish : next,
+                isLastPage: _isLastPage,
               ),
             ],
           ),

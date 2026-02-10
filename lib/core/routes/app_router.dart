@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/routes/routes_name.dart';
+import 'package:news/features/Auth/screens/login_screen.dart';
 import 'package:news/features/onboarding/screens/onborading_screen.dart';
 import 'package:news/features/spalsh/splash_screen.dart';
 
@@ -14,6 +15,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const OnboradingScreen(),
         );
+      case RoutesName.loginScreen:
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(
