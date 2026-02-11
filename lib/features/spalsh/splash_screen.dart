@@ -21,9 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
       );
       if (!mounted) return;
       if (isFirstTime == null || isFirstTime) {
-        context.pushNamedAndRemoveUntil(RoutesName.onboradingScreen);
+        context.pushReplacementNamed(RoutesName.onboradingScreen);
       } else {
-        context.pushNamedAndRemoveUntil(RoutesName.loginScreen);
+        context.pushReplacementNamed(RoutesName.loginScreen);
       }
     });
   }
