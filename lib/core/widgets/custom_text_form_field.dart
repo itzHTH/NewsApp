@@ -47,22 +47,27 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         SizedBox(height: 8.h),
         TextFormField(
           style: AppTextStyles.textPrimaryRegular16,
+          textAlign: TextAlign.start,
           controller: widget.textEditingController,
           autocorrect: widget.isPassword ?? false,
           keyboardType: widget.keyboardType ?? TextInputType.text,
+          textAlignVertical: (widget.isPassword ?? false)
+              ? TextAlignVertical.center
+              : TextAlignVertical.top,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: widget.onFieldSubmitted,
           validator: widget.validator,
-          scrollPadding: widget.scrollPadding ?? EdgeInsets.all(20),
+          scrollPadding: EdgeInsets.all(20),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
-              vertical: widget.verticalContentPadding,
-              horizontal: 10,
+              vertical: 16.h,
+              horizontal: 10.w,
             ),
             hintText: widget.hint,
             suffixIcon: widget.isPassword ?? false
                 ? IconButton(
+                    padding: EdgeInsets.zero,
                     onPressed: () {
                       setState(() {
                         _isHide = !_isHide;

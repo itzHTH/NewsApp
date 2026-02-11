@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/routes/routes_name.dart';
 import 'package:news/features/Auth/screens/login_screen.dart';
+import 'package:news/features/Auth/screens/register_screen.dart';
 import 'package:news/features/onboarding/screens/onborading_screen.dart';
 import 'package:news/features/spalsh/splash_screen.dart';
 
@@ -17,6 +18,8 @@ class AppRouter {
         );
       case RoutesName.loginScreen:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
+      case RoutesName.registerScreen:
+        return MaterialPageRoute(builder: (context) => const RegisterScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(
