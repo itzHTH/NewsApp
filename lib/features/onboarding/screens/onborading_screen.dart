@@ -74,6 +74,7 @@ class _OnboradingScreenState extends State<OnboradingScreen> {
 
   void finish() async {
     await SharedPrefsHelper().setBoolValue(AppConstants.isFirstTime, false);
+    if (!mounted) return;
     context.pushNamedAndRemoveUntil(RoutesName.loginScreen);
   }
 
