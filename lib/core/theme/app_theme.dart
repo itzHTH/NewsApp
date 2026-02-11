@@ -40,5 +40,18 @@ class AppTheme {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     ),
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.primaryColor,
+      selectedIconTheme: IconThemeData(color: AppColors.primaryColor),
+      unselectedIconTheme: IconThemeData(color: AppColors.textSecondaryColor),
+      unselectedItemColor: AppColors.textSecondaryColor,
+      selectedLabelStyle: AppTextStyles.primaryBold14,
+      unselectedLabelStyle: AppTextStyles.textSecondaryBold14,
+      type: BottomNavigationBarType.fixed,
+    ),
+
+    splashFactory: NoSplash.splashFactory,
   );
 }

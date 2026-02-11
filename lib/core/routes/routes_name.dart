@@ -3,5 +3,5 @@ class RoutesName {
   static const String onboradingScreen = '/onborading';
   static const String loginScreen = '/login';
   static const String registerScreen = '/register';
-  static const String homeScreen = '/home';
+  static const String mainScreen = '/main';
 }

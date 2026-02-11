@@ -15,6 +15,12 @@ class AppTextStyles {
     color: AppColors.primaryColor,
   );
 
+  static TextStyle? primaryBold14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+
   static TextStyle? prDarkGrayBold20 = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
@@ -29,6 +35,11 @@ class AppTextStyles {
 
   static TextStyle? textSecondaryBold20 = TextStyle(
     fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textSecondaryColor,
+  );
+  static TextStyle? textSecondaryBold14 = TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.textSecondaryColor,
   );

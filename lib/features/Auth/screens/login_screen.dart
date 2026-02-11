@@ -62,7 +62,12 @@ class LoginScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20.h),
-              ElevatedButton(onPressed: () {}, child: Text('Sign In')),
+              ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(RoutesName.mainScreen);
+                },
+                child: Text('Sign In'),
+              ),
               SizedBox(height: 24.h),
               AuthBottomRow(
                 text: 'Don\'t have an account?',
