@@ -26,4 +26,28 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.prMediumGray,
   );
+
+  static TextStyle? textSecondaryBold20 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textSecondaryColor,
+  );
+
+  static TextStyle? textSecondaryRegular16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textSecondaryColor,
+  );
+
+  static TextStyle? textPrimaryRegular16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPrimaryColor,
+  );
+
+  static TextStyle? textTertiaryRegular16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textTertiaryColor,
+  );
 }
