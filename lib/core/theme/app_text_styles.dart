@@ -21,6 +21,39 @@ class AppTextStyles {
     color: AppColors.primaryColor,
   );
 
+  static TextStyle? primaryBold32 = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.primaryColor,
+  );
+
+  static TextStyle? whiteBold16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryWhiteColor,
+  );
+
+  static TextStyle? whiteBold14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryWhiteColor,
+  );
+
+  static TextStyle? whiteRegular14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPrimaryWhiteColor,
+  );
+
+  static TextStyle? whiteBold14Underline = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryWhiteColor,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.textPrimaryWhiteColor,
+    decorationThickness: 2.sp,
+  );
+
   static TextStyle? prDarkGrayBold20 = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,

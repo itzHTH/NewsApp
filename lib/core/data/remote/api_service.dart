@@ -24,11 +24,9 @@ class HttpApiService implements IApiService {
     var response = await http.get(Uri.parse(url));
     // decode response
     var data = jsonDecode(response.body);
-    // check if response is ok
     if (data["status"] == "ok") {
       return data["articles"];
     } else {
-      // throw exception if response is not ok
       throw Exception(data["message"]);
     }
   }

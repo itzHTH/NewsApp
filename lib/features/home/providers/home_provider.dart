@@ -19,7 +19,7 @@ class HomeProvider extends ChangeNotifier {
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
-  Future<void> getTopHeadlines(String catagory) async {
+  Future<void> getTopHeadlines({String catagory = "general"}) async {
     try {
       _requestState = RequestState.loading;
       notifyListeners();
