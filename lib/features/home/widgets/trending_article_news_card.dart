@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/extensions/datetime_format_extenstion.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
 import 'package:news/features/home/models/news_article_model.dart';
@@ -35,8 +36,8 @@ class TrendingArticleNewsCard extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.3),
-                    Colors.black.withValues(alpha: 0.6),
+                    Colors.black.withValues(alpha: 0.5),
+                    Colors.black.withValues(alpha: 0.8),
                   ],
                 ),
               ),
@@ -53,7 +54,7 @@ class TrendingArticleNewsCard extends StatelessWidget {
             children: [
               // news title
               Text(
-                articleModel.title ?? "",
+                articleModel.title ?? "No Title",
                 style: AppTextStyles.whiteBold14,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -61,8 +62,10 @@ class TrendingArticleNewsCard extends StatelessWidget {
               SizedBox(height: 8.h),
               // author and time
               AuthorAndTimeNewsCard(
-                authorName: articleModel.author ?? "",
-                time: articleModel.publishedAt ?? "",
+                authorName: articleModel.author ?? "Unknown",
+                time:
+                    articleModel.publishedAt?.calculateTimeAgo ??
+                    "Unknown Time",
                 image: articleModel.urlToImage ?? "",
               ),
             ],

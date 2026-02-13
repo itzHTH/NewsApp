@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/theme/app_text_styles.dart';
+import 'package:news/core/widgets/custom_cached_network_image.dart';
 
 class AuthorAndTimeNewsCard extends StatelessWidget {
   const AuthorAndTimeNewsCard({
@@ -19,7 +20,14 @@ class AuthorAndTimeNewsCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CircleAvatar(radius: 10.r, backgroundImage: AssetImage(image)),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10.r),
+          child: CustomCachedNetworkImage(
+            imageUrl: image,
+            height: 20.h,
+            width: 20.w,
+          ),
+        ),
         SizedBox(width: 8.w),
         Expanded(
           child: Text(
