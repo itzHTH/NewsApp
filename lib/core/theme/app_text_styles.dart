@@ -89,6 +89,27 @@ class AppTextStyles {
     color: AppColors.textPrimaryColor,
   );
 
+  static TextStyle? textPrimaryRegular14 = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPrimaryColor,
+  );
+
+  static TextStyle? textPrimaryBold16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryColor,
+  );
+
+  static TextStyle? textPrimaryRegular14Underline = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textPrimaryColor,
+    decoration: TextDecoration.underline,
+    decorationColor: AppColors.textPrimaryColor,
+    decorationThickness: 2.sp,
+  );
+
   static TextStyle? textTertiaryRegular16 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,

@@ -7,9 +7,11 @@ class ViewAllSectionWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.isDark = false,
   });
 
   final String title;
+  final bool isDark;
   final VoidCallback onPressed;
 
   @override
@@ -18,11 +20,21 @@ class ViewAllSectionWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         children: [
-          Text(title, style: AppTextStyles.whiteBold16),
+          Text(
+            title,
+            style: !isDark
+                ? AppTextStyles.whiteBold16
+                : AppTextStyles.textPrimaryBold16,
+          ),
           Spacer(),
           TextButton(
             onPressed: onPressed,
-            child: Text("View All", style: AppTextStyles.whiteBold14Underline),
+            child: Text(
+              "View All",
+              style: !isDark
+                  ? AppTextStyles.whiteBold14Underline
+                  : AppTextStyles.textPrimaryRegular14Underline,
+            ),
           ),
         ],
       ),
