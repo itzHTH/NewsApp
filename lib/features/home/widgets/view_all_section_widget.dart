@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/theme/app_colors.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 
 class ViewAllSectionWidget extends StatelessWidget {
@@ -27,13 +28,26 @@ class ViewAllSectionWidget extends StatelessWidget {
                 : AppTextStyles.textPrimaryBold16,
           ),
           Spacer(),
-          TextButton(
-            onPressed: onPressed,
-            child: Text(
-              "View All",
-              style: !isDark
-                  ? AppTextStyles.whiteBold14Underline
-                  : AppTextStyles.textPrimaryRegular14Underline,
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onPressed,
+              borderRadius: BorderRadius.circular(12.r),
+              splashColor: AppColors.textTertiaryColor.withValues(alpha: 0.2),
+              highlightColor: AppColors.textTertiaryColor.withValues(
+                alpha: 0.2,
+              ),
+              overlayColor: WidgetStateProperty.all(
+                AppColors.textTertiaryColor.withValues(alpha: 0.2),
+              ),
+              splashFactory: InkRipple.splashFactory,
+
+              child: Text(
+                "View All",
+                style: !isDark
+                    ? AppTextStyles.whiteBold14Underline
+                    : AppTextStyles.textPrimaryRegular14Underline,
+              ),
             ),
           ),
         ],

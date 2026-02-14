@@ -29,6 +29,7 @@ class _CategoryTabsListState extends State<CategoryTabsList> {
             isSelected: index == selectedIndex,
             title: ApiConfig.categoryEndpoint[index],
             onTap: () {
+              if (index == selectedIndex) return;
               context.read<HomeProvider>().changeCategory(
                 ApiConfig.categoryEndpoint[index],
               );

@@ -32,15 +32,17 @@ class _AuthorAndTimeNewsCardState extends State<AuthorAndTimeNewsCard> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Author Image
         ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(30.r),
           child: CustomCachedNetworkImage(
             imageUrl: widget.image,
-            height: 20.h,
-            width: 20.w,
+            height: 24.h,
+            width: 24.w,
           ),
         ),
         SizedBox(width: 8.w),
+        // Author Name
         Expanded(
           child: Text(
             widget.authorName,
@@ -52,12 +54,14 @@ class _AuthorAndTimeNewsCardState extends State<AuthorAndTimeNewsCard> {
           ),
         ),
         SizedBox(width: 8.w),
+        // Time
         Text(
           widget.time,
           style: !widget.isDark
               ? AppTextStyles.whiteRegular14
               : AppTextStyles.textPrimaryRegular14,
         ),
+        // Bookmark Icon
         SizedBox(width: widget.hasBookmark ? 16.w : 0.w),
         if (widget.hasBookmark)
           InkWell(
