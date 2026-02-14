@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import 'package:news/core/enums/requst_state_enum.dart';
 import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/widgets/category_news_card.dart';
-import 'package:provider/provider.dart';
 
 class SliverCategoryNewsList extends StatelessWidget {
   const SliverCategoryNewsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeProvider>(
-      builder: (context, provider, child) {
-        return SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          sliver: SliverList.separated(
-            separatorBuilder: (context, index) => SizedBox(height: 16.h),
-            itemCount: provider.categoryArticles.length,
-            itemBuilder: (context, index) {
-              return CategoryNewsCard(
-                articleModel: provider.categoryArticles[index],
-              );
-            },
+    return Selector<HomeProvider, RequestState>(
+      selector: (context, provider) => provider.categoryRequestState,
+      builder: (context, requestState, child) {
+        return switch (requestState) {
+          RequestState.loading => SliverToBoxAdapter(
+            child: const Center(child: CircularProgressIndicator()),
           ),
-        );
+          RequestState.error => SliverToBoxAdapter(
+            child: Text(context.read<HomeProvider>().errorMessage),
+          ),
+          RequestState.success => SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            sliver: SliverList.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+              itemCount: context.read<HomeProvider>().categoryArticles.length,
+              itemBuilder: (context, index) {
+                return CategoryNewsCard(
+                  articleModel: context
+                      .read<HomeProvider>()
+                      .categoryArticles[index],
+                );
+              },
+            ),
+          ),
+        };
       },
     );
   }

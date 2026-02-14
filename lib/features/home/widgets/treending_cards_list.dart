@@ -14,20 +14,27 @@ class TreendingCardsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 140.h,
-      child: Consumer<HomeProvider>(
-        builder: (context, provider, child) {
-          return switch (provider.requestState) {
+      child: Selector<HomeProvider, RequestState>(
+        selector: (context, provider) => provider.topHeadlineRequestState,
+        builder: (context, requestState, child) {
+          return switch (requestState) {
             RequestState.loading => const Center(
               child: CircularProgressIndicator(),
             ),
             RequestState.success => ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              itemCount: provider.topHeadlinesArticles.take(10).length,
+              itemCount: context
+                  .read<HomeProvider>()
+                  .topHeadlinesArticles
+                  .take(10)
+                  .length,
               separatorBuilder: (context, index) => SizedBox(width: 16.w),
               itemBuilder: (context, index) {
                 return TrendingArticleNewsCard(
-                  articleModel: provider.topHeadlinesArticles[index],
+                  articleModel: context
+                      .read<HomeProvider>()
+                      .topHeadlinesArticles[index],
                 );
               },
             ),
