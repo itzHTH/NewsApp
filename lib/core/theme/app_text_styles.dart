@@ -33,6 +33,12 @@ class AppTextStyles {
     color: AppColors.textPrimaryWhiteColor,
   );
 
+  static TextStyle? whiteBold20 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryWhiteColor,
+  );
+
   static TextStyle? whiteBold14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.bold,
@@ -97,6 +103,12 @@ class AppTextStyles {
 
   static TextStyle? textPrimaryBold16 = TextStyle(
     fontSize: 16.sp,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimaryColor,
+  );
+
+  static TextStyle? textPrimaryBold20 = TextStyle(
+    fontSize: 20.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimaryColor,
   );

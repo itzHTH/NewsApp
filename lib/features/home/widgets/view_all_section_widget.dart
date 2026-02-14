@@ -24,8 +24,8 @@ class ViewAllSectionWidget extends StatelessWidget {
           Text(
             title,
             style: !isDark
-                ? AppTextStyles.whiteBold16
-                : AppTextStyles.textPrimaryBold16,
+                ? AppTextStyles.whiteBold20
+                : AppTextStyles.textPrimaryBold20,
           ),
           Spacer(),
           Material(
