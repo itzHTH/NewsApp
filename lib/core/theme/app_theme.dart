@@ -53,5 +53,7 @@ class AppTheme {
     ),
 
     splashFactory: NoSplash.splashFactory,
+
+    dividerTheme: DividerThemeData(color: AppColors.border1Color, thickness: 1),
   );
 }

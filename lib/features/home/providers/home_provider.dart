@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/enums/requst_state_enum.dart';
-import 'package:news/features/home/models/news_article_model.dart';
-import 'package:news/features/home/repos/home_repositrey.dart';
+import 'package:news/core/models/news_article_model.dart';
+import 'package:news/core/repos/news_repositrey.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final IHomeRepository homeRepository;
-  HomeProvider({required this.homeRepository});
+  final INewsRepository newsRepository;
+  HomeProvider({required this.newsRepository});
 
   List<NewsArticleModel> _topHeadlinesArticles = [];
   List<NewsArticleModel> get topHeadlinesArticles => _topHeadlinesArticles;
@@ -28,7 +28,7 @@ class HomeProvider extends ChangeNotifier {
     try {
       _topHeadlineRequestState = RequestState.loading;
       notifyListeners();
-      _topHeadlinesArticles = await homeRepository.getTopHeadlines("general");
+      _topHeadlinesArticles = await newsRepository.getTopHeadlines("general");
       _topHeadlineRequestState = RequestState.success;
       notifyListeners();
     } catch (e) {
@@ -43,7 +43,7 @@ class HomeProvider extends ChangeNotifier {
       categoryArticles.clear();
       _categoryRequestState = RequestState.loading;
       notifyListeners();
-      _categoryArticles = await homeRepository.getTopHeadlines(catagory);
+      _categoryArticles = await newsRepository.getTopHeadlines(catagory);
       _categoryRequestState = RequestState.success;
       notifyListeners();
     } catch (e) {

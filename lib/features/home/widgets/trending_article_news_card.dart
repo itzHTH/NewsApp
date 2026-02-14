@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/extensions/datetime_format_extenstion.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
-import 'package:news/features/home/models/news_article_model.dart';
+import 'package:news/core/models/news_article_model.dart';
 import 'package:news/features/home/widgets/author_and_time_news_card.dart';
 
 class TrendingArticleNewsCard extends StatelessWidget {

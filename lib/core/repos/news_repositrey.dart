@@ -1,17 +1,17 @@
 import 'package:news/core/data/remote/api_config.dart';
 import 'package:news/core/data/remote/api_service.dart';
-import 'package:news/features/home/models/news_article_model.dart';
+import 'package:news/core/models/news_article_model.dart';
 
-abstract class IHomeRepository {
+abstract class INewsRepository {
   Future<List<NewsArticleModel>> getTopHeadlines(String catagory);
 
-  Future<List<NewsArticleModel>> getEverything();
+  Future<List<NewsArticleModel>> getEverything(String query);
 }
 
-class HomeRepositoryImpl implements IHomeRepository {
+class NewsRepositoryImpl implements INewsRepository {
   final IApiService apiService;
 
-  HomeRepositoryImpl({required this.apiService});
+  NewsRepositoryImpl({required this.apiService});
   @override
   Future<List<NewsArticleModel>> getTopHeadlines(String catagory) async {
     try {
@@ -28,9 +28,12 @@ class HomeRepositoryImpl implements IHomeRepository {
   }
 
   @override
-  Future<List<NewsArticleModel>> getEverything() async {
+  Future<List<NewsArticleModel>> getEverything(String query) async {
     try {
-      var response = await apiService.get(ApiConfig.everythingEndpoint);
+      var response = await apiService.get(
+        ApiConfig.everythingEndpoint,
+        queryParameters: {"q": query},
+      );
       return (response as List<dynamic>)
           .map((e) => NewsArticleModel.fromJson(e))
           .toList();

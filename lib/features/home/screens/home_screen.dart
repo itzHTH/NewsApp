@@ -4,7 +4,7 @@ import 'package:news/core/data/remote/api_config.dart';
 import 'package:provider/provider.dart';
 import 'package:news/core/data/remote/api_service.dart';
 import 'package:news/features/home/providers/home_provider.dart';
-import 'package:news/features/home/repos/home_repositrey.dart';
+import 'package:news/core/repos/news_repositrey.dart';
 import 'package:news/features/home/widgets/category_tabs_list.dart';
 import 'package:news/features/home/widgets/sliver_category_news_list.dart';
 import 'package:news/features/home/widgets/trending_home_app_bar.dart';
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) =>
           HomeProvider(
-              homeRepository: HomeRepositoryImpl(apiService: HttpApiService()),
+              newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
             )
             ..getTopHeadlines()
             ..getCategoryArticles(catagory: ApiConfig.categoryEndpoint[0]),
