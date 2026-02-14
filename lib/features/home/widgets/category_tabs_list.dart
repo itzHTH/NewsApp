@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/data/remote/api_config.dart';
+import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/widgets/category_item.dart';
+import 'package:provider/provider.dart';
 
 class CategoryTabsList extends StatefulWidget {
   const CategoryTabsList({super.key});
@@ -20,12 +23,18 @@ class _CategoryTabsListState extends State<CategoryTabsList> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         separatorBuilder: (context, index) => SizedBox(width: 8.w),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: ApiConfig.categoryEndpoint.length,
         itemBuilder: (context, index) {
           return CategoryItem(
             isSelected: index == selectedIndex,
-            title: "Category",
+            title: ApiConfig.categoryEndpoint[index],
             onTap: () {
+              context.read<HomeProvider>().changeCategory(
+                ApiConfig.categoryEndpoint[index],
+              );
+              context.read<HomeProvider>().getCategoryArticles(
+                catagory: ApiConfig.categoryEndpoint[index],
+              );
               setState(() {
                 selectedIndex = index;
               });

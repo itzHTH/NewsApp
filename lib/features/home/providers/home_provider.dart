@@ -10,8 +10,10 @@ class HomeProvider extends ChangeNotifier {
   List<NewsArticleModel> _topHeadlinesArticles = [];
   List<NewsArticleModel> get topHeadlinesArticles => _topHeadlinesArticles;
 
-  List<NewsArticleModel> _everythingArticles = [];
-  List<NewsArticleModel> get everythingArticles => _everythingArticles;
+  String _selectedCategory = "general";
+  String get selectedCategory => _selectedCategory;
+  List<NewsArticleModel> _categoryArticles = [];
+  List<NewsArticleModel> get categoryArticles => _categoryArticles;
 
   RequestState _requestState = RequestState.loading;
   RequestState get requestState => _requestState;
@@ -19,11 +21,11 @@ class HomeProvider extends ChangeNotifier {
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
 
-  Future<void> getTopHeadlines({String catagory = "general"}) async {
+  Future<void> getTopHeadlines() async {
     try {
       _requestState = RequestState.loading;
       notifyListeners();
-      _topHeadlinesArticles = await homeRepository.getTopHeadlines(catagory);
+      _topHeadlinesArticles = await homeRepository.getTopHeadlines("general");
       _requestState = RequestState.success;
       notifyListeners();
     } catch (e) {
@@ -33,11 +35,12 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getEverything() async {
+  Future<void> getCategoryArticles({String catagory = "general"}) async {
     try {
+      categoryArticles.clear();
       _requestState = RequestState.loading;
       notifyListeners();
-      _everythingArticles = await homeRepository.getEverything();
+      _categoryArticles = await homeRepository.getTopHeadlines(catagory);
       _requestState = RequestState.success;
       notifyListeners();
     } catch (e) {
@@ -45,5 +48,10 @@ class HomeProvider extends ChangeNotifier {
       notifyListeners();
       _errorMessage = e.toString();
     }
+  }
+
+  void changeCategory(String category) {
+    _selectedCategory = category;
+    notifyListeners();
   }
 }

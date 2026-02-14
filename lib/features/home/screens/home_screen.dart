@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/data/remote/api_config.dart';
 import 'package:provider/provider.dart';
-
 import 'package:news/core/data/remote/api_service.dart';
 import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/repos/home_repositrey.dart';
@@ -16,9 +16,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => HomeProvider(
-        homeRepository: HomeRepositoryImpl(apiService: HttpApiService()),
-      )..getTopHeadlines(),
+      create: (context) =>
+          HomeProvider(
+              homeRepository: HomeRepositoryImpl(apiService: HttpApiService()),
+            )
+            ..getTopHeadlines()
+            ..getCategoryArticles(catagory: ApiConfig.categoryEndpoint[0]),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [

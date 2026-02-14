@@ -4,4 +4,14 @@ class ApiConfig {
   static const String apiKey = "3584500984cc41c4a18fa7700b4486d4";
   static const String topHeadlinesEndpoint = "top-headlines";
   static const String everythingEndpoint = "everything";
+
+  static const List<String> categoryEndpoint = [
+    "business",
+    "entertainment",
+    "general",
+    "health",
+    "science",
+    "sports",
+    "technology",
+  ];
 }

@@ -15,10 +15,10 @@ class SliverCategoryNewsList extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           sliver: SliverList.separated(
             separatorBuilder: (context, index) => SizedBox(height: 16.h),
-            itemCount: provider.topHeadlinesArticles.length,
+            itemCount: provider.categoryArticles.length,
             itemBuilder: (context, index) {
               return CategoryNewsCard(
-                articleModel: provider.topHeadlinesArticles[index],
+                articleModel: provider.categoryArticles[index],
               );
             },
           ),
