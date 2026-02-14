@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/features/home/widgets/category_news_card_shimmer.dart';
 import 'package:provider/provider.dart';
 
 import 'package:news/core/enums/requst_state_enum.dart';
@@ -15,12 +16,20 @@ class SliverCategoryNewsList extends StatelessWidget {
       selector: (context, provider) => provider.categoryRequestState,
       builder: (context, requestState, child) {
         return switch (requestState) {
-          RequestState.loading => SliverToBoxAdapter(
-            child: const Center(child: CircularProgressIndicator()),
+          RequestState.loading => SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            sliver: SliverList.separated(
+              itemBuilder: (context, index) {
+                return const CategoryNewsCardShimmer();
+              },
+              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+              itemCount: 10,
+            ),
           ),
           RequestState.error => SliverToBoxAdapter(
             child: Text(context.read<HomeProvider>().errorMessage),
           ),
+
           RequestState.success => SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             sliver: SliverList.separated(

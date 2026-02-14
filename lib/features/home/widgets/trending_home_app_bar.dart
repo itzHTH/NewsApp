@@ -28,7 +28,7 @@ class TrendingHomeAppBar extends StatelessWidget {
               child: Text("NEWST", style: AppTextStyles.primaryBold32),
             ),
           ),
-          // Catigories View All Section
+          // Trending News View All Section
           Positioned.fill(
             top: 100.h,
             child: Align(

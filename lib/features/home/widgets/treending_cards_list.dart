@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/features/home/widgets/trending_article_news_card_shimmer.dart';
 import 'package:provider/provider.dart';
 
 import 'package:news/core/enums/requst_state_enum.dart';
@@ -18,8 +19,14 @@ class TreendingCardsList extends StatelessWidget {
         selector: (context, provider) => provider.topHeadlineRequestState,
         builder: (context, requestState, child) {
           return switch (requestState) {
-            RequestState.loading => const Center(
-              child: CircularProgressIndicator(),
+            RequestState.loading => ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              itemCount: 10,
+              separatorBuilder: (context, index) => SizedBox(width: 16.w),
+              itemBuilder: (context, index) {
+                return const TrendingArticleNewsCardShimmer();
+              },
             ),
             RequestState.success => ListView.separated(
               scrollDirection: Axis.horizontal,
