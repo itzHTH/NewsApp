@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:news/core/extensions/datetime_format_extenstion.dart';
-import 'package:news/core/theme/app_text_styles.dart';
-import 'package:news/core/widgets/custom_cached_network_image.dart';
+import 'package:news/core/extensions/route_extension.dart';
 import 'package:news/core/models/news_article_model.dart';
-import 'package:news/features/home/widgets/author_and_time_news_card.dart';
+import 'package:news/core/routes/routes_name.dart';
+import 'package:news/core/theme/app_colors.dart';
+import 'package:news/core/theme/app_text_styles.dart';
+import 'package:news/core/widgets/author_and_time_news_card.dart';
+import 'package:news/core/widgets/custom_cached_network_image.dart';
 
 class TrendingArticleNewsCard extends StatelessWidget {
   const TrendingArticleNewsCard({super.key, required this.articleModel});
@@ -69,6 +73,29 @@ class TrendingArticleNewsCard extends StatelessWidget {
                 image: articleModel.urlToImage ?? "",
               ),
             ],
+          ),
+        ),
+
+        // Click effect
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(12.r),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              splashColor: AppColors.primaryColor.withValues(alpha: 0.1),
+              highlightColor: AppColors.primaryColor.withValues(alpha: 0.1),
+              overlayColor: WidgetStatePropertyAll(
+                AppColors.primaryColor.withValues(alpha: 0.1),
+              ),
+              splashFactory: InkSplash.splashFactory,
+              onTap: () {
+                context.pushNamed(
+                  RoutesName.newsDetailsScreen,
+                  arguments: articleModel,
+                );
+              },
+            ),
           ),
         ),
       ],

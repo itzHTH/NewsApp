@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news/core/models/news_article_model.dart';
 import 'package:news/core/routes/routes_name.dart';
 import 'package:news/features/Auth/screens/login_screen.dart';
 import 'package:news/features/Auth/screens/register_screen.dart';
 import 'package:news/features/main/screens/main_screen.dart';
+import 'package:news/features/news_details/screens/news_details_screen.dart';
 import 'package:news/features/onboarding/screens/onborading_screen.dart';
 import 'package:news/features/spalsh/splash_screen.dart';
 
@@ -23,6 +25,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const RegisterScreen());
       case RoutesName.mainScreen:
         return MaterialPageRoute(builder: (context) => const MainScreen());
+      case RoutesName.newsDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) => NewsDetailsScreen(
+            article: settings.arguments as NewsArticleModel,
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

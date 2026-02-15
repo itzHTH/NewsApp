@@ -19,6 +19,7 @@ class TreendingCardsList extends StatelessWidget {
         selector: (context, provider) => provider.topHeadlineRequestState,
         builder: (context, requestState, child) {
           return switch (requestState) {
+            // loading
             RequestState.loading => ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -28,6 +29,7 @@ class TreendingCardsList extends StatelessWidget {
                 return const TrendingArticleNewsCardShimmer();
               },
             ),
+            // success
             RequestState.success => ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -45,6 +47,7 @@ class TreendingCardsList extends StatelessWidget {
                 );
               },
             ),
+            // error
             RequestState.error => Center(
               child: Text(
                 "Error To Load Treding News",

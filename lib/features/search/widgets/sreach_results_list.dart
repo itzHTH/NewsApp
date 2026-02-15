@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/enums/requst_state_enum.dart';
+import 'package:news/core/extensions/route_extension.dart';
+import 'package:news/core/routes/routes_name.dart';
 import 'package:news/features/search/provider/search_provider.dart';
 import 'package:news/features/search/widgets/search_item.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +33,12 @@ class SreachResultsList extends StatelessWidget {
               itemBuilder: (context, index) {
                 return SearchItem(
                   article: provider.searchResults[index],
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(
+                      RoutesName.newsDetailsScreen,
+                      arguments: provider.searchResults[index],
+                    );
+                  },
                 );
               },
             );
