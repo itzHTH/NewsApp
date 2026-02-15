@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/data/remote/api_config.dart';
+import 'package:news/core/extensions/route_extension.dart';
+import 'package:news/core/routes/routes_name.dart';
 import 'package:provider/provider.dart';
 import 'package:news/core/data/remote/api_service.dart';
 import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/core/repos/news_repositrey.dart';
-import 'package:news/features/home/widgets/category_tabs_list.dart';
-import 'package:news/features/home/widgets/sliver_category_news_list.dart';
+import 'package:news/core/widgets/category_tabs_list.dart';
+import 'package:news/core/widgets/sliver_category_news_list.dart';
 import 'package:news/features/home/widgets/trending_home_app_bar.dart';
 import 'package:news/features/home/widgets/view_all_section_widget.dart';
 
@@ -30,10 +32,19 @@ class HomeScreen extends StatelessWidget {
 
             // Category Section
             SliverToBoxAdapter(
-              child: ViewAllSectionWidget(
-                title: "Category",
-                onPressed: () {},
-                isDark: true,
+              child: Builder(
+                builder: (context) {
+                  return ViewAllSectionWidget(
+                    title: "Category",
+                    onPressed: () {
+                      context.pushNamed(
+                        RoutesName.categoriesScreen,
+                        arguments: context.read<HomeProvider>(),
+                      );
+                    },
+                    isDark: true,
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: 8.h)),
