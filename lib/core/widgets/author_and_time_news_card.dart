@@ -12,6 +12,8 @@ class AuthorAndTimeNewsCard extends StatefulWidget {
     required this.image,
     this.isDark = false,
     this.hasBookmark = false,
+    this.onBookmarkTap,
+    this.isBookmarked = false,
   });
 
   final String authorName;
@@ -19,13 +21,29 @@ class AuthorAndTimeNewsCard extends StatefulWidget {
   final String image;
   final bool isDark;
   final bool hasBookmark;
+  final bool isBookmarked;
+  final VoidCallback? onBookmarkTap;
 
   @override
   State<AuthorAndTimeNewsCard> createState() => _AuthorAndTimeNewsCardState();
 }
 
 class _AuthorAndTimeNewsCardState extends State<AuthorAndTimeNewsCard> {
-  bool isBookmarked = false;
+  late bool isBookmarked;
+
+  @override
+  void initState() {
+    super.initState();
+    isBookmarked = widget.isBookmarked;
+  }
+
+  @override
+  void didUpdateWidget(covariant AuthorAndTimeNewsCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isBookmarked != widget.isBookmarked) {
+      isBookmarked = widget.isBookmarked;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +92,7 @@ class _AuthorAndTimeNewsCardState extends State<AuthorAndTimeNewsCard> {
               setState(() {
                 isBookmarked = !isBookmarked;
               });
+              widget.onBookmarkTap?.call();
             },
             child: Icon(
               isBookmarked

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/models/news_article_model.dart';
-import 'package:news/features/bookmark/repo/bookmark_repo.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 
 class BookmarkProvider extends ChangeNotifier {
   List<NewsArticleModel> _bookmarks = [];

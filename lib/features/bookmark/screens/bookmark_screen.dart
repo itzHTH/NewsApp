@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:news/core/data/local/hive_helper.dart';
 import 'package:news/core/theme/app_colors.dart';
 import 'package:news/features/bookmark/provider/bookmark_provider.dart';
-import 'package:news/features/bookmark/repo/bookmark_repo.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/features/bookmark/widgets/empty_bookmark_body.dart';
 
 class BookmarkScreen extends StatelessWidget {
