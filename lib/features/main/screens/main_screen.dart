@@ -14,13 +14,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const SearchScreen(),
-    const BookmarkScreen(),
-    const Center(child: Text("Profile Screen")),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -30,7 +23,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _selectedIndex, children: _screens),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          HomeScreen(isActive: _selectedIndex == 0),
+          const SearchScreen(),
+          BookmarkScreen(isActive: _selectedIndex == 2),
+          const Center(child: Text("Profile Screen")),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 30.w,
         items: const <BottomNavigationBarItem>[

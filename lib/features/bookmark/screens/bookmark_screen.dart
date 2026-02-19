@@ -8,14 +8,37 @@ import 'package:news/features/bookmark/provider/bookmark_provider.dart';
 import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/features/bookmark/widgets/empty_bookmark_body.dart';
 
-class BookmarkScreen extends StatelessWidget {
-  const BookmarkScreen({super.key});
+class BookmarkScreen extends StatefulWidget {
+  const BookmarkScreen({super.key, this.isActive = false});
+
+  final bool isActive;
+
+  @override
+  State<BookmarkScreen> createState() => _BookmarkScreenState();
+}
+
+class _BookmarkScreenState extends State<BookmarkScreen> {
+  late final BookmarkProvider _bookmarkProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _bookmarkProvider = BookmarkProvider(BookmarkRepoImpl(HiveHelper()))
+      ..getBookmarks();
+  }
+
+  @override
+  void didUpdateWidget(covariant BookmarkScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive && !oldWidget.isActive) {
+      _bookmarkProvider.getBookmarks();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          BookmarkProvider(BookmarkRepoImpl(HiveHelper()))..getBookmarks(),
+    return ChangeNotifierProvider.value(
+      value: _bookmarkProvider,
       child: Scaffold(
         body: CustomScrollView(
           slivers: [

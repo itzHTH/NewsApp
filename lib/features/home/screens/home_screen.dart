@@ -14,19 +14,42 @@ import 'package:news/core/widgets/sliver_category_news_list.dart';
 import 'package:news/features/home/widgets/trending_home_app_bar.dart';
 import 'package:news/features/home/widgets/view_all_section_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, this.isActive = false});
+
+  final bool isActive;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final HomeProvider _homeProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeProvider =
+        HomeProvider(
+            bookmarkRepo: BookmarkRepoImpl(HiveHelper()),
+            newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
+          )
+          ..getTopHeadlines()
+          ..getCategoryArticles(catagory: ApiConfig.categoryEndpoint[0]);
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive && !oldWidget.isActive) {
+      _homeProvider.refreshBookmarks();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          HomeProvider(
-              bookmarkRepo: BookmarkRepoImpl(HiveHelper()),
-              newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
-            )
-            ..getTopHeadlines()
-            ..getCategoryArticles(catagory: ApiConfig.categoryEndpoint[0]),
+    return ChangeNotifierProvider.value(
+      value: _homeProvider,
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
