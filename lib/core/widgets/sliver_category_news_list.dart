@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/features/home/widgets/category_news_card_shimmer.dart';
 import 'package:provider/provider.dart';
 
 import 'package:news/core/enums/requst_state_enum.dart';
 import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/widgets/category_news_card.dart';
+import 'package:news/features/home/widgets/category_news_card_shimmer.dart';
 
 class SliverCategoryNewsList extends StatelessWidget {
   const SliverCategoryNewsList({super.key});
@@ -36,14 +36,16 @@ class SliverCategoryNewsList extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemCount: context.read<HomeProvider>().categoryArticles.length,
               itemBuilder: (context, index) {
+                final article = context
+                    .read<HomeProvider>()
+                    .categoryArticles[index];
                 return CategoryNewsCard(
-                  articleModel: context
-                      .read<HomeProvider>()
-                      .categoryArticles[index],
-                  onBookmarkTap: () async {
-                    await context.read<HomeProvider>().toggleBookmark(
-                      context.read<HomeProvider>().categoryArticles[index],
-                    );
+                  articleModel: article,
+                  isBookmarked: context.read<HomeProvider>().isBookmarked(
+                    article,
+                  ),
+                  onBookmarkTap: () {
+                    context.read<HomeProvider>().toggleBookmark(article);
                   },
                 );
               },

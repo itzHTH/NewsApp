@@ -7,7 +7,9 @@ import 'package:news/core/repos/news_repositrey.dart';
 class HomeProvider extends ChangeNotifier {
   final INewsRepository newsRepository;
   final IBookmarkRepo bookmarkRepo;
-  HomeProvider({required this.newsRepository, required this.bookmarkRepo});
+  HomeProvider({required this.newsRepository, required this.bookmarkRepo}) {
+    _loadBookmarkStates();
+  }
 
   List<NewsArticleModel> _topHeadlinesArticles = [];
   List<NewsArticleModel> get topHeadlinesArticles => _topHeadlinesArticles;
@@ -25,6 +27,9 @@ class HomeProvider extends ChangeNotifier {
 
   String _errorMessage = "";
   String get errorMessage => _errorMessage;
+
+  // Bookmark state tracking
+  final Set<String> _bookmarkedUrls = {};
 
   Future<void> getTopHeadlines() async {
     try {
@@ -60,17 +65,29 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> _loadBookmarkStates() async {
+    final bookmarks = await bookmarkRepo.getBookmarks();
+    _bookmarkedUrls.clear();
+    for (final bookmark in bookmarks) {
+      if (bookmark.url != null) {
+        _bookmarkedUrls.add(bookmark.url!);
+      }
+    }
+  }
+
   Future<void> toggleBookmark(NewsArticleModel article) async {
-    final isBookmarked = await bookmarkRepo.isBookmarked(article);
-    if (isBookmarked) {
+    if (article.url == null) return;
+    if (_bookmarkedUrls.contains(article.url)) {
       await bookmarkRepo.removeBookmark(article);
+      _bookmarkedUrls.remove(article.url);
     } else {
       await bookmarkRepo.saveBookmark(article);
+      _bookmarkedUrls.add(article.url!);
     }
     notifyListeners();
   }
 
-  Future<bool> isBookmarked(NewsArticleModel article) async {
-    return await bookmarkRepo.isBookmarked(article);
+  bool isBookmarked(NewsArticleModel article) {
+    return _bookmarkedUrls.contains(article.url);
   }
 }

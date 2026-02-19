@@ -7,9 +7,14 @@ import 'package:news/core/widgets/author_and_time_news_card.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
 
 class BookmarkNewsItem extends StatelessWidget {
-  const BookmarkNewsItem({super.key, required this.article});
+  const BookmarkNewsItem({
+    super.key,
+    required this.article,
+    required this.onBookmarkTap,
+  });
 
   final NewsArticleModel article;
+  final VoidCallback onBookmarkTap;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,8 @@ class BookmarkNewsItem extends StatelessWidget {
           image: article.urlToImage ?? "",
           isDark: true,
           hasBookmark: true,
+          isBookmarked: true,
+          onBookmarkTap: () => onBookmarkTap(),
         ),
       ],
     );

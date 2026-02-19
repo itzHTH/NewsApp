@@ -14,10 +14,12 @@ class CategoryNewsCard extends StatelessWidget {
     super.key,
     required this.articleModel,
     this.onBookmarkTap,
+    required this.isBookmarked,
   });
 
   final NewsArticleModel articleModel;
   final VoidCallback? onBookmarkTap;
+  final bool isBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class CategoryNewsCard extends StatelessWidget {
                   image: articleModel.urlToImage ?? "",
                   hasBookmark: true,
                   onBookmarkTap: onBookmarkTap,
+                  isBookmarked: isBookmarked,
                 ),
               ],
             ),
