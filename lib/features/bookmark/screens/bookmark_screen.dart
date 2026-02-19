@@ -14,7 +14,8 @@ class BookmarkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => BookmarkProvider(BookmarkRepoImpl(HiveHelper())),
+      create: (context) =>
+          BookmarkProvider(BookmarkRepoImpl(HiveHelper()))..getBookmarks(),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [

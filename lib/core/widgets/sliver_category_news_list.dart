@@ -40,6 +40,11 @@ class SliverCategoryNewsList extends StatelessWidget {
                   articleModel: context
                       .read<HomeProvider>()
                       .categoryArticles[index],
+                  onBookmarkTap: () async {
+                    await context.read<HomeProvider>().toggleBookmark(
+                      context.read<HomeProvider>().categoryArticles[index],
+                    );
+                  },
                 );
               },
             ),

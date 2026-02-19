@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:news/core/extensions/datetime_format_extenstion.dart';
 import 'package:news/core/extensions/route_extension.dart';
+import 'package:news/core/models/news_article_model.dart';
 import 'package:news/core/routes/routes_name.dart';
 import 'package:news/core/theme/app_text_styles.dart';
-import 'package:news/core/widgets/custom_cached_network_image.dart';
-import 'package:news/core/models/news_article_model.dart';
 import 'package:news/core/widgets/author_and_time_news_card.dart';
+import 'package:news/core/widgets/custom_cached_network_image.dart';
 
 class CategoryNewsCard extends StatelessWidget {
-  const CategoryNewsCard({super.key, required this.articleModel});
+  const CategoryNewsCard({
+    super.key,
+    required this.articleModel,
+    this.onBookmarkTap,
+  });
 
   final NewsArticleModel articleModel;
+  final VoidCallback? onBookmarkTap;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +60,7 @@ class CategoryNewsCard extends StatelessWidget {
                       articleModel.publishedAt?.calculateTimeAgo ?? "Just Now",
                   image: articleModel.urlToImage ?? "",
                   hasBookmark: true,
+                  onBookmarkTap: onBookmarkTap,
                 ),
               ],
             ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:news/core/enums/requst_state_enum.dart';
 import 'package:news/core/models/news_article_model.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/core/repos/news_repositrey.dart';
 
 class HomeProvider extends ChangeNotifier {
   final INewsRepository newsRepository;
-  HomeProvider({required this.newsRepository});
+  final IBookmarkRepo bookmarkRepo;
+  HomeProvider({required this.newsRepository, required this.bookmarkRepo});
 
   List<NewsArticleModel> _topHeadlinesArticles = [];
   List<NewsArticleModel> get topHeadlinesArticles => _topHeadlinesArticles;
@@ -56,5 +58,19 @@ class HomeProvider extends ChangeNotifier {
   void changeCategory(String category) {
     _selectedCategory = category;
     notifyListeners();
+  }
+
+  Future<void> toggleBookmark(NewsArticleModel article) async {
+    final isBookmarked = await bookmarkRepo.isBookmarked(article);
+    if (isBookmarked) {
+      await bookmarkRepo.removeBookmark(article);
+    } else {
+      await bookmarkRepo.saveBookmark(article);
+    }
+    notifyListeners();
+  }
+
+  Future<bool> isBookmarked(NewsArticleModel article) async {
+    return await bookmarkRepo.isBookmarked(article);
   }
 }

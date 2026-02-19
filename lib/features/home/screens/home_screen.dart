@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/data/local/hive_helper.dart';
 import 'package:news/core/data/remote/api_config.dart';
 import 'package:news/core/extensions/route_extension.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/core/routes/routes_name.dart';
 import 'package:provider/provider.dart';
 import 'package:news/core/data/remote/api_service.dart';
@@ -20,6 +22,7 @@ class HomeScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) =>
           HomeProvider(
+              bookmarkRepo: BookmarkRepoImpl(HiveHelper()),
               newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
             )
             ..getTopHeadlines()
