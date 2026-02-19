@@ -6,5 +6,5 @@ class AppConstants {
 
   static const String isFirstTime = "isFirstTime";
 
-  static const String bookmarkNewsBox = "bookmarkNewsBox";
+  static const String bookmarkNewsLazyBox = "bookmarkNewsLazyBox";
 }

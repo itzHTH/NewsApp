@@ -55,4 +55,25 @@ class HiveHelper {
   Future<void> deleteFromDiskLazy() async {
     await _lazyBox.deleteFromDisk();
   }
+
+  Future<void> clearBox() async {
+    await _box.clear();
+  }
+
+  Future<void> clearBoxLazy() async {
+    await _lazyBox.clear();
+  }
+
+  Future<List<dynamic>> getAllLazy() async {
+    List<dynamic> list = [];
+    var keys = _lazyBox.keys;
+    for (var key in keys) {
+      list.add(await _lazyBox.get(key));
+    }
+    return list;
+  }
+
+  Future<bool> containsKeyLazy(String key) async {
+    return _lazyBox.containsKey(key);
+  }
 }

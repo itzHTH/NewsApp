@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/features/bookmark/screens/bookmark_screen.dart';
 import 'package:news/features/home/screens/home_screen.dart';
 import 'package:news/features/search/screens/search_screen.dart';
 
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const Center(child: Text("Bookmark Screen")),
+    const BookmarkScreen(),
     const Center(child: Text("Profile Screen")),
   ];
 

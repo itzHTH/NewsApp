@@ -8,7 +8,7 @@ import 'package:news/news_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveHelper().initHive();
-  await HiveHelper().openBox(AppConstants.bookmarkNewsBox);
+  await HiveHelper().openLazyBox(AppConstants.bookmarkNewsLazyBox);
   await SharedPrefsHelper().initShared();
   await ScreenUtil.ensureScreenSize();
 
