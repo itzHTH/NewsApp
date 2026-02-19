@@ -26,10 +26,8 @@ class BookmarkRepoImpl implements IBookmarkRepo {
 
   @override
   Future<List<NewsArticleModel>> getBookmarks() async {
-    final List<dynamic> result = await _hiveHelper.getAllLazy();
-    final List<BookmarkModel> bookmarks = result
-        .map((e) => BookmarkModel.fromJson(Map<String, dynamic>.from(e)))
-        .toList();
+    final List<BookmarkModel> bookmarks = await _hiveHelper
+        .getAllLazy<BookmarkModel>();
     return bookmarks.map((e) => e.toEntity()).toList();
   }
 
@@ -49,6 +47,6 @@ class BookmarkRepoImpl implements IBookmarkRepo {
   Future<void> saveBookmark(NewsArticleModel article) async {
     if (article.url == null) return;
     final bookmark = BookmarkModel.fromEntity(article);
-    await _hiveHelper.putLazy(article.url!, bookmark.toJson());
+    await _hiveHelper.putLazy(article.url!, bookmark);
   }
 }

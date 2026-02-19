@@ -12,19 +12,23 @@ class HiveHelper {
     await Hive.initFlutter();
   }
 
-  Future<void> openBox(String boxName) async {
-    _box = await Hive.openBox(boxName);
+  void registerAdapter<T>(TypeAdapter<T> adapter) {
+    Hive.registerAdapter(adapter);
   }
 
-  Future<void> openLazyBox(String boxName) async {
-    _lazyBox = await Hive.openLazyBox(boxName);
+  Future<void> openBox<T>(String boxName) async {
+    _box = await Hive.openBox<T>(boxName);
   }
 
-  Future<void> put(String key, dynamic value) async {
+  Future<void> openLazyBox<T>(String boxName) async {
+    _lazyBox = await Hive.openLazyBox<T>(boxName);
+  }
+
+  Future<void> put<T>(String key, T value) async {
     await _box.put(key, value);
   }
 
-  Future<void> putLazy(String key, dynamic value) async {
+  Future<void> putLazy<T>(String key, T value) async {
     await _lazyBox.put(key, value);
   }
 
@@ -64,8 +68,8 @@ class HiveHelper {
     await _lazyBox.clear();
   }
 
-  Future<List<dynamic>> getAllLazy() async {
-    List<dynamic> list = [];
+  Future<List<T>> getAllLazy<T>() async {
+    List<T> list = [];
     var keys = _lazyBox.keys;
     for (var key in keys) {
       list.add(await _lazyBox.get(key));
