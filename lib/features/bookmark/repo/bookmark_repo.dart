@@ -1,6 +1,6 @@
 import 'package:news/core/data/local/hive_helper.dart';
 import 'package:news/core/models/news_article_model.dart';
-import 'package:news/features/bookmark/data/models/bookmark_model.dart';
+import 'package:news/features/bookmark/models/bookmark_model.dart';
 
 abstract class IBookmarkRepo {
   Future<List<NewsArticleModel>> getBookmarks();
