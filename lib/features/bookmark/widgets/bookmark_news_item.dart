@@ -14,6 +14,7 @@ class BookmarkNewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Image
         CustomCachedNetworkImage(
@@ -23,6 +24,8 @@ class BookmarkNewsItem extends StatelessWidget {
           fit: BoxFit.cover,
         ),
 
+        SizedBox(height: 6.h),
+
         // Title
         Text(
           article.title ?? "",
@@ -30,6 +33,7 @@ class BookmarkNewsItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
+        SizedBox(height: 2.h),
 
         // Description
         AuthorAndTimeNewsCard(
