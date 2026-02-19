@@ -113,7 +113,9 @@ class _OnboradingScreenState extends State<OnboradingScreen> {
               SmoothPageIndicator(
                 controller: pageController,
                 count: 3,
-                effect: SwapEffect(activeDotColor: AppColors.primaryColor),
+                effect: const SwapEffect(
+                  activeDotColor: AppColors.primaryColor,
+                ),
               ),
               SizedBox(height: 120.h),
               OnboardingButton(

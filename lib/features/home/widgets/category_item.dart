@@ -21,7 +21,7 @@ class CategoryItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(16.r),
       onTap: onTap,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primaryColor : null,

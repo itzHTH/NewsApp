@@ -42,7 +42,7 @@ class TrendingHomeAppBar extends StatelessWidget {
           // Top News Card List
           Positioned.fill(
             top: 140.h,
-            child: Align(
+            child: const Align(
               alignment: Alignment.topCenter,
               child: TreendingCardsList(),
             ),

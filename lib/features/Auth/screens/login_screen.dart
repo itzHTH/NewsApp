@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/auth-background.png'),
             fit: BoxFit.cover,
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () {
                   context.pushNamed(RoutesName.mainScreen);
                 },
-                child: Text('Sign In'),
+                child: const Text('Sign In'),
               ),
               SizedBox(height: 24.h),
               AuthBottomRow(

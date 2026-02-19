@@ -27,7 +27,7 @@ class ViewAllSectionWidget extends StatelessWidget {
                 ? AppTextStyles.whiteBold20
                 : AppTextStyles.textPrimaryBold20,
           ),
-          Spacer(),
+          const Spacer(),
           Material(
             color: Colors.transparent,
             child: InkWell(

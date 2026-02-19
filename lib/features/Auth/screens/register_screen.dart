@@ -14,7 +14,7 @@ class RegisterScreen extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/auth-background.png'),
             fit: BoxFit.cover,
@@ -74,7 +74,7 @@ class RegisterScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20.h),
-              ElevatedButton(onPressed: () {}, child: Text('Sign Up')),
+              ElevatedButton(onPressed: () {}, child: const Text('Sign Up')),
               SizedBox(height: 24.h),
               AuthBottomRow(
                 text: 'Already have an account?',

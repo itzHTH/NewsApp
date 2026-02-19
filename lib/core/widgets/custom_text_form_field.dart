@@ -57,7 +57,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           textInputAction: widget.textInputAction,
           onFieldSubmitted: widget.onFieldSubmitted,
           validator: widget.validator,
-          scrollPadding: EdgeInsets.all(20),
+          scrollPadding: const EdgeInsets.all(20),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(

@@ -16,7 +16,7 @@ class AppTheme {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(0)),
         ),
-        fixedSize: Size(double.maxFinite, 50),
+        fixedSize: const Size(double.maxFinite, 50),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: AppColors.buttonTextColor,
       ),
@@ -25,7 +25,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       fillColor: Colors.white,
       filled: true,
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderRadius: BorderRadius.zero,
         borderSide: BorderSide.none,
       ),
@@ -44,8 +44,10 @@ class AppTheme {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       selectedItemColor: AppColors.primaryColor,
-      selectedIconTheme: IconThemeData(color: AppColors.primaryColor),
-      unselectedIconTheme: IconThemeData(color: AppColors.textSecondaryColor),
+      selectedIconTheme: const IconThemeData(color: AppColors.primaryColor),
+      unselectedIconTheme: const IconThemeData(
+        color: AppColors.textSecondaryColor,
+      ),
       unselectedItemColor: AppColors.textSecondaryColor,
       selectedLabelStyle: AppTextStyles.primaryBold14,
       unselectedLabelStyle: AppTextStyles.textSecondaryBold14,
@@ -54,6 +56,9 @@ class AppTheme {
 
     splashFactory: NoSplash.splashFactory,
 
-    dividerTheme: DividerThemeData(color: AppColors.border1Color, thickness: 1),
+    dividerTheme: const DividerThemeData(
+      color: AppColors.border1Color,
+      thickness: 1,
+    ),
   );
 }

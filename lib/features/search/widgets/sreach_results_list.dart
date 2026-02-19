@@ -16,10 +16,10 @@ class SreachResultsList extends StatelessWidget {
       builder: (context, provider, child) {
         switch (provider.searchState) {
           case RequestState.loading:
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
 
           case RequestState.error:
-            return Center(child: Text("Error"));
+            return const Center(child: Text("Error"));
 
           case RequestState.success:
             return ListView.separated(

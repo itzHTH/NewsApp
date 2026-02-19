@@ -31,15 +31,15 @@ class SearchTextBar extends StatelessWidget {
         ),
         suffixIconColor: AppColors.textTertiaryColor,
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.border2Color),
+          borderSide: const BorderSide(color: AppColors.border2Color),
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.border2Color),
+          borderSide: const BorderSide(color: AppColors.border2Color),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.border2Color),
+          borderSide: const BorderSide(color: AppColors.border2Color),
           borderRadius: BorderRadius.circular(10),
         ),
       ),

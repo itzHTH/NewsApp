@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
-          title: Text("Search"),
+          title: const Text("Search"),
           centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
@@ -51,7 +51,7 @@ class SearchScreen extends StatelessWidget {
                 SizedBox(height: 12.h),
 
                 // Search Results
-                Expanded(child: SreachResultsList()),
+                const Expanded(child: SreachResultsList()),
               ],
             ),
           ),

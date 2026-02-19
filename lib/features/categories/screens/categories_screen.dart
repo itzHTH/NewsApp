@@ -18,19 +18,19 @@ class CategoriesScreen extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
+            const SliverAppBar(
               pinned: true,
-              title: const Text('Categories'),
+              title: Text('Categories'),
               centerTitle: true,
               backgroundColor: AppColors.bgColor,
               surfaceTintColor: Colors.transparent,
             ),
             SliverToBoxAdapter(child: SizedBox(height: 8.h)),
             // Category Tabs List
-            SliverToBoxAdapter(child: CategoryTabsList()),
+            const SliverToBoxAdapter(child: CategoryTabsList()),
             SliverToBoxAdapter(child: SizedBox(height: 8.h)),
             // Category News List (For Tabs)
-            SliverCategoryNewsList(),
+            const SliverCategoryNewsList(),
           ],
         ),
       ),

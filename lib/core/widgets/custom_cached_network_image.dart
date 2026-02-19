@@ -44,8 +44,8 @@ class CustomCachedNetworkImage extends StatelessWidget {
           color: Colors.grey,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
-          child: const Icon(Icons.not_interested_outlined, color: Colors.white),
+        child: const Center(
+          child: Icon(Icons.not_interested_outlined, color: Colors.white),
         ),
       ),
     );

@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             // Trending Home AppBar
-            SliverToBoxAdapter(child: TrendingHomeAppBar()),
+            const SliverToBoxAdapter(child: TrendingHomeAppBar()),
 
             // Category Section
             SliverToBoxAdapter(
@@ -49,10 +49,10 @@ class HomeScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(child: SizedBox(height: 8.h)),
             // Category Tabs List
-            SliverToBoxAdapter(child: CategoryTabsList()),
+            const SliverToBoxAdapter(child: CategoryTabsList()),
             SliverToBoxAdapter(child: SizedBox(height: 8.h)),
             // Category News List (For Tabs)
-            SliverCategoryNewsList(),
+            const SliverCategoryNewsList(),
           ],
         ),
       ),
