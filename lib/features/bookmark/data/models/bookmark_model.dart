@@ -1,12 +1,23 @@
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:news/core/models/news_article_model.dart';
 
+part 'bookmark_model.g.dart';
+
+@HiveType(typeId: 0)
 class BookmarkModel {
+  @HiveField(0)
   final String? author;
+  @HiveField(1)
   final String? title;
+  @HiveField(2)
   final String? description;
+  @HiveField(3)
   final String? url;
+  @HiveField(4)
   final String? urlToImage;
+  @HiveField(5)
   final DateTime? publishedAt;
+  @HiveField(6)
   final String? content;
 
   BookmarkModel({
