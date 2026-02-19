@@ -8,6 +8,8 @@ import 'package:news/core/routes/routes_name.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/core/widgets/author_and_time_news_card.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
+import 'package:news/features/home/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class CategoryNewsCard extends StatelessWidget {
   const CategoryNewsCard({
@@ -29,7 +31,7 @@ class CategoryNewsCard extends StatelessWidget {
       onTap: () {
         context.pushNamed(
           RoutesName.newsDetailsScreen,
-          arguments: articleModel,
+          arguments: (articleModel, context.read<HomeProvider>()),
         );
       },
       child: Row(

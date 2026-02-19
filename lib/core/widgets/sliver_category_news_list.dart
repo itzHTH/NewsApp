@@ -12,10 +12,9 @@ class SliverCategoryNewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<HomeProvider, RequestState>(
-      selector: (context, provider) => provider.categoryRequestState,
-      builder: (context, requestState, child) {
-        return switch (requestState) {
+    return Consumer<HomeProvider>(
+      builder: (context, provider, child) {
+        return switch (provider.categoryRequestState) {
           RequestState.loading => SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             sliver: SliverList.separated(
@@ -27,25 +26,21 @@ class SliverCategoryNewsList extends StatelessWidget {
             ),
           ),
           RequestState.error => SliverToBoxAdapter(
-            child: Text(context.read<HomeProvider>().errorMessage),
+            child: Text(provider.errorMessage),
           ),
 
           RequestState.success => SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             sliver: SliverList.separated(
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
-              itemCount: context.read<HomeProvider>().categoryArticles.length,
+              itemCount: provider.categoryArticles.length,
               itemBuilder: (context, index) {
-                final article = context
-                    .read<HomeProvider>()
-                    .categoryArticles[index];
+                final article = provider.categoryArticles[index];
                 return CategoryNewsCard(
                   articleModel: article,
-                  isBookmarked: context.read<HomeProvider>().isBookmarked(
-                    article,
-                  ),
+                  isBookmarked: provider.isBookmarked(article),
                   onBookmarkTap: () {
-                    context.read<HomeProvider>().toggleBookmark(article);
+                    provider.toggleBookmark(article);
                   },
                 );
               },

@@ -28,10 +28,16 @@ class AppRouter {
       case RoutesName.mainScreen:
         return MaterialPageRoute(builder: (context) => const MainScreen());
       case RoutesName.newsDetailsScreen:
+        final args = settings.arguments;
+        if (args is (NewsArticleModel, HomeProvider)) {
+          return MaterialPageRoute(
+            builder: (context) =>
+                NewsDetailsScreen(article: args.$1, homeProvider: args.$2),
+          );
+        }
         return MaterialPageRoute(
-          builder: (context) => NewsDetailsScreen(
-            article: settings.arguments as NewsArticleModel,
-          ),
+          builder: (context) =>
+              NewsDetailsScreen(article: args as NewsArticleModel),
         );
       case RoutesName.categoriesScreen:
         return MaterialPageRoute(

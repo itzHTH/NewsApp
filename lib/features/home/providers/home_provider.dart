@@ -75,6 +75,11 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> refreshBookmarks() async {
+    await _loadBookmarkStates();
+    notifyListeners();
+  }
+
   Future<void> toggleBookmark(NewsArticleModel article) async {
     if (article.url == null) return;
     if (_bookmarkedUrls.contains(article.url)) {
@@ -84,7 +89,7 @@ class HomeProvider extends ChangeNotifier {
       await bookmarkRepo.saveBookmark(article);
       _bookmarkedUrls.add(article.url!);
     }
-    notifyListeners();
+    await refreshBookmarks();
   }
 
   bool isBookmarked(NewsArticleModel article) {

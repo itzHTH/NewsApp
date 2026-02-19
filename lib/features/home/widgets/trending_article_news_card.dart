@@ -9,6 +9,8 @@ import 'package:news/core/theme/app_colors.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/core/widgets/author_and_time_news_card.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
+import 'package:news/features/home/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class TrendingArticleNewsCard extends StatelessWidget {
   const TrendingArticleNewsCard({super.key, required this.articleModel});
@@ -92,7 +94,7 @@ class TrendingArticleNewsCard extends StatelessWidget {
               onTap: () {
                 context.pushNamed(
                   RoutesName.newsDetailsScreen,
-                  arguments: articleModel,
+                  arguments: (articleModel, context.read<HomeProvider>()),
                 );
               },
             ),

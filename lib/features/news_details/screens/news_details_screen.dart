@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/data/local/hive_helper.dart';
 import 'package:news/core/extensions/datetime_format_extenstion.dart';
 import 'package:news/core/models/news_article_model.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/core/theme/app_colors.dart';
 import 'package:news/core/theme/app_text_styles.dart';
 import 'package:news/core/widgets/author_and_time_news_card.dart';
 import 'package:news/core/widgets/custom_cached_network_image.dart';
+import 'package:news/features/home/providers/home_provider.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
-  const NewsDetailsScreen({super.key, required this.article});
+  NewsDetailsScreen({super.key, required this.article, this.homeProvider});
 
   final NewsArticleModel article;
+  final HomeProvider? homeProvider;
+  final IBookmarkRepo _bookmarkRepo = BookmarkRepoImpl(HiveHelper());
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +62,14 @@ class NewsDetailsScreen extends StatelessWidget {
                 image: article.urlToImage ?? "",
                 isDark: true,
                 hasBookmark: true,
+                isBookmarked: homeProvider?.isBookmarked(article) ?? false,
+                onBookmarkTap: () {
+                  if (homeProvider != null) {
+                    homeProvider!.toggleBookmark(article);
+                  } else {
+                    _bookmarkRepo.saveBookmark(article);
+                  }
+                },
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: 16.h)),
