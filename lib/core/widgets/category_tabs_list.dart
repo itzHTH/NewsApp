@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/data/remote/api_config.dart';
-import 'package:news/features/home/providers/home_provider.dart';
+import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
 import 'package:news/features/home/widgets/category_item.dart';
-import 'package:provider/provider.dart';
 
 class CategoryTabsList extends StatefulWidget {
   const CategoryTabsList({super.key});
@@ -30,11 +30,8 @@ class _CategoryTabsListState extends State<CategoryTabsList> {
             title: ApiConfig.categoryEndpoint[index],
             onTap: () {
               if (index == selectedIndex) return;
-              context.read<HomeProvider>().changeCategory(
-                ApiConfig.categoryEndpoint[index],
-              );
-              context.read<HomeProvider>().getCategoryArticles(
-                catagory: ApiConfig.categoryEndpoint[index],
+              BlocProvider.of<CategoryCubit>(context).getCategoryArticles(
+                category: ApiConfig.categoryEndpoint[index],
               );
               setState(() {
                 selectedIndex = index;

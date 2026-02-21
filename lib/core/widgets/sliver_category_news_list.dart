@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-
-import 'package:news/core/enums/requst_state_enum.dart';
-import 'package:news/features/home/providers/home_provider.dart';
+import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
 import 'package:news/features/home/widgets/category_news_card.dart';
 import 'package:news/features/home/widgets/category_news_card_shimmer.dart';
 
@@ -12,10 +10,10 @@ class SliverCategoryNewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeProvider>(
-      builder: (context, provider, child) {
-        return switch (provider.categoryRequestState) {
-          RequestState.loading => SliverPadding(
+    return BlocBuilder<CategoryCubit, CategoryState>(
+      builder: (context, state) {
+        return switch (state) {
+          CategoryLoading() => SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             sliver: SliverList.separated(
               itemBuilder: (context, index) {
@@ -25,27 +23,24 @@ class SliverCategoryNewsList extends StatelessWidget {
               itemCount: 10,
             ),
           ),
-          RequestState.error => SliverToBoxAdapter(
-            child: Text(provider.errorMessage),
-          ),
 
-          RequestState.success => SliverPadding(
+          CategoryLoaded state => SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             sliver: SliverList.separated(
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
-              itemCount: provider.categoryArticles.length,
+              itemCount: state.categoryArticles.length,
               itemBuilder: (context, index) {
-                final article = provider.categoryArticles[index];
+                final article = state.categoryArticles[index];
                 return CategoryNewsCard(
                   articleModel: article,
-                  isBookmarked: provider.isBookmarked(article),
-                  onBookmarkTap: () {
-                    provider.toggleBookmark(article);
-                  },
+                  isBookmarked: false,
+                  onBookmarkTap: () {},
                 );
               },
             ),
           ),
+
+          CategoryError state => SliverToBoxAdapter(child: Text(state.message)),
         };
       },
     );
