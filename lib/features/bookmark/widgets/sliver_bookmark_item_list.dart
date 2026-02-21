@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
-import 'package:news/features/bookmark/provider/bookmark_provider.dart';
+import 'package:news/features/bookmark/cubit/bookmark/bookmark_cubit.dart';
 import 'package:news/features/bookmark/widgets/bookmark_news_item.dart';
 
 class SliverBookmarkItemList extends StatelessWidget {
@@ -10,15 +10,16 @@ class SliverBookmarkItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<BookmarkCubit>().state as BookmarkLoaded;
     return SliverList.separated(
       separatorBuilder: (context, index) => SizedBox(height: 16.h),
-      itemCount: context.watch<BookmarkProvider>().bookmarks.length,
+      itemCount: state.articles.length,
       itemBuilder: (context, index) {
-        final article = context.read<BookmarkProvider>().bookmarks[index];
+        final article = state.articles[index];
         return BookmarkNewsItem(
           article: article,
           onBookmarkTap: () {
-            context.read<BookmarkProvider>().removeBookmark(article);
+            context.read<BookmarkCubit>().removeBookmark(article);
           },
         );
       },

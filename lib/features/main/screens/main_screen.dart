@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          HomeScreen(isActive: _selectedIndex == 0),
+          const HomeScreen(),
           const SearchScreen(),
           BookmarkScreen(isActive: _selectedIndex == 2),
           const Center(child: Text("Profile Screen")),

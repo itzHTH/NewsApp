@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
+import 'package:provider/provider.dart';
 import 'package:news/core/data/remote/api_service.dart';
 import 'package:news/core/extensions/route_extension.dart';
 import 'package:news/core/repos/news_repositrey.dart';
@@ -13,34 +14,12 @@ import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/widgets/trending_home_app_bar.dart';
 import 'package:news/features/home/widgets/view_all_section_widget.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.isActive = false});
-
-  final bool isActive;
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // _homeProvider = HomeProvider(
-    //   bookmarkRepo: BookmarkRepoImpl(HiveHelper()),
-    //   newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
-    // )..getCategoryArticles(catagory: ApiConfig.categoryEndpoint[0]);
-  }
-
-  @override
-  void didUpdateWidget(covariant HomeScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isActive && !oldWidget.isActive) {}
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
         BlocProvider(
           create: (context) => TopHeadlineCubit(
