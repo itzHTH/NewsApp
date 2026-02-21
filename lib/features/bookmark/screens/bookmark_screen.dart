@@ -55,7 +55,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                           ? const SliverFillRemaining(
                               child: EmptyBookmarkBody(),
                             )
-                          : const SliverBookmarkItemList();
+                          : SliverBookmarkItemList(state: state);
                   }
                 },
               ),

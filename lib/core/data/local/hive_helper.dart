@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 class HiveHelper {
@@ -10,6 +11,10 @@ class HiveHelper {
 
   Future<void> initHive() async {
     await Hive.initFlutter();
+  }
+
+  ValueListenable<LazyBox<dynamic>> getLazyBoxListenable({List<String>? keys}) {
+    return _lazyBox.listenable(keys: keys);
   }
 
   void registerAdapter<T>(TypeAdapter<T> adapter) {
