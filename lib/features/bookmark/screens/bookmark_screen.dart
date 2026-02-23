@@ -51,11 +51,13 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                         child: Center(child: Text(state.message)),
                       );
                     case BookmarkLoaded():
-                      return state.articles.isEmpty
+                      return state.bookmarkArticles.isEmpty
                           ? const SliverFillRemaining(
                               child: EmptyBookmarkBody(),
                             )
-                          : SliverBookmarkItemList(state: state);
+                          : SliverBookmarkItemList(
+                              bookmarkArtical: state.bookmarkArticles,
+                            );
                   }
                 },
               ),

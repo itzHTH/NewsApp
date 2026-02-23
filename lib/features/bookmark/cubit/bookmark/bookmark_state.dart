@@ -10,10 +10,10 @@ sealed class BookmarkState extends Equatable {
 final class BookmarkLoading extends BookmarkState {}
 
 final class BookmarkLoaded extends BookmarkState {
-  final List<NewsArticleModel> articles;
-  const BookmarkLoaded({required this.articles});
+  final List<NewsArticleModel> bookmarkArticles;
+  const BookmarkLoaded({required this.bookmarkArticles});
   @override
-  List<Object> get props => [articles];
+  List<Object> get props => [bookmarkArticles];
 }
 
 final class BookmarkError extends BookmarkState {

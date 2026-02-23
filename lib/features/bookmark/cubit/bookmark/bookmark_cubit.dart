@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:news/core/models/news_article_model.dart';
 import 'package:news/core/repos/bookmark_repo.dart';
 
@@ -9,16 +7,14 @@ part 'bookmark_state.dart';
 
 class BookmarkCubit extends Cubit<BookmarkState> {
   final IBookmarkRepo bookmarkRepo;
-  late final ValueListenable<LazyBox<dynamic>> _listenable;
 
   BookmarkCubit({required this.bookmarkRepo}) : super(BookmarkLoading()) {
-    _listenable = bookmarkRepo.getBookmarksListenable();
-    _listenable.addListener(_onBookmarksChanged);
+    bookmarkRepo.getBookmarksListenable().addListener(_onBookmarksChanged);
   }
 
   @override
   Future<void> close() {
-    _listenable.removeListener(_onBookmarksChanged);
+    bookmarkRepo.getBookmarksListenable().removeListener(_onBookmarksChanged);
     return super.close();
   }
 
@@ -28,8 +24,7 @@ class BookmarkCubit extends Cubit<BookmarkState> {
 
   Future<void> getBookmarks() async {
     try {
-      final bookmarks = await bookmarkRepo.getBookmarks();
-      emit(BookmarkLoaded(articles: bookmarks));
+      emit(BookmarkLoaded(bookmarkArticles: await bookmarkRepo.getBookmarks()));
     } catch (e) {
       emit(BookmarkError(message: e.toString()));
     }
@@ -38,7 +33,14 @@ class BookmarkCubit extends Cubit<BookmarkState> {
   Future<void> removeBookmark(NewsArticleModel article) async {
     try {
       await bookmarkRepo.removeBookmark(article);
-      await getBookmarks();
+    } catch (e) {
+      emit(BookmarkError(message: e.toString()));
+    }
+  }
+
+  Future<void> saveBookmark(NewsArticleModel article) async {
+    try {
+      await bookmarkRepo.saveBookmark(article);
     } catch (e) {
       emit(BookmarkError(message: e.toString()));
     }
@@ -46,36 +48,21 @@ class BookmarkCubit extends Cubit<BookmarkState> {
 
   Future<void> toggleBookmark(NewsArticleModel article) async {
     try {
-      print("BookmarkCubit: toggleBookmark requested for: ${article.title}");
-
-      // Use the repo to check the real truth in Hive, not the UI state
-      final isSaved = await bookmarkRepo.isBookmarked(article);
-      print("BookmarkCubit: currently saved status = $isSaved");
-
-      if (isSaved) {
-        print("BookmarkCubit: removing bookmark...");
-        await bookmarkRepo.removeBookmark(article);
-        print("BookmarkCubit: removed successfully.");
+      if (await bookmarkRepo.isBookmarked(article)) {
+        await removeBookmark(article);
       } else {
-        print("BookmarkCubit: saving bookmark...");
-        await bookmarkRepo.saveBookmark(article);
-        print("BookmarkCubit: saved successfully.");
+        await saveBookmark(article);
       }
 
-      print("BookmarkCubit: triggering getBookmarks() manually.");
       await getBookmarks();
-    } catch (e, stackTrace) {
-      print("BookmarkCubit ERROR: $e");
-      print(stackTrace);
+    } catch (e) {
       emit(BookmarkError(message: e.toString()));
     }
   }
 
   bool isBookmarked(NewsArticleModel article) {
     if (state is BookmarkLoaded) {
-      final bookmarks = (state as BookmarkLoaded).articles;
-      // We check by URL because checking the whole object might fail
-      // if there are slight differences in DateTime parsing between API and Hive DB.
+      final bookmarks = (state as BookmarkLoaded).bookmarkArticles;
       return bookmarks.any((b) => b.url == article.url);
     }
     return false;
