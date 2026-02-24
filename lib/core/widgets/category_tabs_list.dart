@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/data/remote/api_config.dart';
-import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
+import 'package:news/features/categories/cubit/category_cubit.dart';
 import 'package:news/features/home/widgets/category_item.dart';
 
 class CategoryTabsList extends StatefulWidget {

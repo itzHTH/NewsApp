@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/theme/app_colors.dart';
 import 'package:news/core/widgets/category_tabs_list.dart';
 import 'package:news/core/widgets/sliver_category_news_list.dart';
-import 'package:news/features/home/providers/home_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:news/features/categories/cubit/category_cubit.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.provider});
+  const CategoriesScreen({super.key, required this.categoryCubit});
 
-  final HomeProvider provider;
+  final CategoryCubit categoryCubit;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: provider,
+    return BlocProvider.value(
+      value: categoryCubit,
       child: Scaffold(
         body: CustomScrollView(
           slivers: [

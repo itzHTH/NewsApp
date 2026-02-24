@@ -12,9 +12,8 @@ import 'package:news/core/routes/routes_name.dart';
 import 'package:news/core/widgets/category_tabs_list.dart';
 import 'package:news/core/widgets/sliver_category_news_list.dart';
 import 'package:news/features/bookmark/cubit/bookmark/bookmark_cubit.dart';
-import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
+import 'package:news/features/categories/cubit/category_cubit.dart';
 import 'package:news/features/home/cubits/top_headline/top_headline_cubit.dart';
-import 'package:news/features/home/providers/home_provider.dart';
 import 'package:news/features/home/widgets/trending_home_app_bar.dart';
 import 'package:news/features/home/widgets/view_all_section_widget.dart';
 
@@ -56,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       context.pushNamed(
                         RoutesName.categoriesScreen,
-                        arguments: context.read<HomeProvider>(),
+                        arguments: context.read<CategoryCubit>(),
                       );
                     },
                     isDark: true,

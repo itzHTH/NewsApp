@@ -36,7 +36,7 @@ class SreachResultsList extends StatelessWidget {
                   onTap: () {
                     context.pushNamed(
                       RoutesName.newsDetailsScreen,
-                      arguments: provider.searchResults[index],
+                      arguments: (provider.searchResults[index],),
                     );
                   },
                 );

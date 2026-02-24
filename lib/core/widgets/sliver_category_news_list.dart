@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/features/bookmark/cubit/bookmark/bookmark_cubit.dart';
-import 'package:news/features/home/cubits/category/cubit/category_cubit.dart';
+import 'package:news/features/categories/cubit/category_cubit.dart';
 import 'package:news/features/home/widgets/category_news_card.dart';
 import 'package:news/features/home/widgets/category_news_card_shimmer.dart';
 
@@ -39,6 +39,7 @@ class SliverCategoryNewsList extends StatelessWidget {
                       isBookmarked: context.read<BookmarkCubit>().isBookmarked(
                         article,
                       ),
+
                       onBookmarkTap: () {
                         context.read<BookmarkCubit>().toggleBookmark(article);
                       },
