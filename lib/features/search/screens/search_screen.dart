@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/data/local/hive_helper.dart';
 import 'package:news/core/data/remote/api_service.dart';
-import 'package:news/features/search/widgets/sreach_results_list.dart';
-import 'package:provider/provider.dart';
+import 'package:news/core/repos/bookmark_repo.dart';
 import 'package:news/core/repos/news_repositrey.dart';
-import 'package:news/features/search/provider/search_provider.dart';
+import 'package:news/features/bookmark/cubit/bookmark/bookmark_cubit.dart';
+import 'package:news/features/search/cubit/search_cubit.dart';
 import 'package:news/features/search/widgets/search_text_bar.dart';
+import 'package:news/features/search/widgets/sreach_results_list.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SearchProvider(
-        newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
-      )..search(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SearchCubit(
+            newsRepository: NewsRepositoryImpl(apiService: HttpApiService()),
+          ),
+        ),
+        BlocProvider(
+          create: (context) =>
+              BookmarkCubit(bookmarkRepo: BookmarkRepoImpl(HiveHelper()))
+                ..getBookmarks(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -33,13 +45,13 @@ class SearchScreen extends StatelessWidget {
                 // Search Text Bar
                 Builder(
                   builder: (context) {
-                    final searchProvider = context.read<SearchProvider>();
+                    final searchCubit = context.read<SearchCubit>();
                     return SearchTextBar(
                       onChanged: (value) {
-                        searchProvider.search(query: value);
+                        searchCubit.search(query: value);
                       },
                       onFieldSubmitted: (value) {
-                        searchProvider.search(query: value);
+                        searchCubit.search(query: value);
                       },
                       onTapOutside: (event) {
                         FocusScope.of(context).unfocus();
